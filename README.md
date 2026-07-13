@@ -43,10 +43,3 @@ Before starting with BLoC, make sure you have:
    * Practical real-world project structure.
 
 ---
-
-## 💻 Getting Started
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/your-username/flutter-bloc-course-omar-ahmed.git](https://github.com/your-username/flutter-bloc-course-omar-ahmed.git)
-   cd flutter-bloc-course-omar-ahmed
