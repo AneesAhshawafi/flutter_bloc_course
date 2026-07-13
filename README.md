@@ -2,8 +2,7 @@
 
 This repository contains code samples, structured notes, and project architecture built while following the **Flutter BLoC (Business Logic Component)** tutorial series by **Omar Ahmed**.
 
-<Image src="image_agent_tag_8927415996699581334" alt="Diagram showing BLoC Architecture components including StreamBuilder, BLoC Provider, and InheritedWidget" caption="BLoC Architecture Flow" />
-
+![BLoC Architecture](https://miro.medium.com/1*vJ1ZbczMuKax8weKW_mY6g.jpeg)
 ---
 
 ## 📌 About the Course
