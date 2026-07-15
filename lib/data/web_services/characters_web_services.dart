@@ -1,3 +1,4 @@
+import 'dart:core';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc_course/constants/strings.dart';
 
@@ -17,9 +18,14 @@ class CharactersWebServices {
 
   Future<List<dynamic>> getAllCharacters() async {
     try {
-      Response response = await dio.get('characters');
-      print(response.data.toString());
-      return response.data;
+      final response = await dio.get('character');
+      if (response.statusCode == 200) {
+        final charactersMap = response.data;
+        final List<dynamic> charactersList = charactersMap['results'] ?? [];
+        return charactersList;
+      } else {
+        return [];
+      }
     } catch (e) {
       print(e.toString());
       return [];

@@ -5,7 +5,7 @@ class Character {
   late String image;
   late String statusIfDeadOrAlive;
   late List<dynamic> episodesAppeareance;
-  late List<dynamic> location;
+  late Map<String, dynamic> location;
 
   Character.fromJson(Map<String, dynamic> json) {
     id = json['id'];

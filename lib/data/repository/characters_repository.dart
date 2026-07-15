@@ -1,3 +1,4 @@
+import 'dart:core';
 import 'package:flutter_bloc_course/data/models/characters.dart';
 import 'package:flutter_bloc_course/data/web_services/characters_web_services.dart';
 

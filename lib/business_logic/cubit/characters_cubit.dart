@@ -8,8 +8,8 @@ import 'package:flutter_bloc_course/data/repository/characters_repository.dart';
 part 'characters_state.dart';
 
 class CharactersCubit extends Cubit<CharactersState> {
-  CharactersRepository charactersRepository;
-  late List<Character> characters;
+  final CharactersRepository charactersRepository;
+  List<Character> characters = [];
   CharactersCubit(this.charactersRepository) : super(CharactersInitial());
   List<Character> getAllCharacters() {
     charactersRepository.getAllCharacters().then((characters) {
