@@ -4,6 +4,7 @@ import 'package:flutter_bloc_course/business_logic/cubit/characters_cubit.dart';
 import 'package:flutter_bloc_course/constants/my_colors.dart';
 import 'package:flutter_bloc_course/data/models/characters.dart';
 import 'package:flutter_bloc_course/presentation/widgets/character_item.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 
 class CharactersScreen extends StatefulWidget {
   const CharactersScreen({super.key});
@@ -158,10 +159,93 @@ class _CharactersScreenState extends State<CharactersScreen> {
         // leading: _isSearching ? BackButton(color: MyColors.myGrey,),
         actions: _buildAppBarActions(),
       ),
-      body: SafeArea(
-        minimum: EdgeInsets.fromLTRB(0, 10, 0, 0),
-        child: buildBlocWidget(),
+      body: OfflineBuilder(
+        connectivityBuilder:
+            (
+              BuildContext context,
+              List<ConnectivityResult> connectivity,
+              Widget child,
+            ) {
+              final bool connected = !connectivity.contains(
+                ConnectivityResult.none,
+              );
+              if (connected) {
+                return buildBlocWidget();
+              } else {
+                return _buildNoInternetWidget();
+              }
+            },
+        child: showLoadingIndicator(),
+      ),
+    );
+  }
+
+  Widget _buildNoInternetWidget() {
+    return Center(
+      child: Container(
+        color: const Color.fromARGB(255, 254, 254, 254),
+        child: Center(
+          child: Column(
+            children: [
+              SizedBox(height: 200),
+              Stack(
+                children: [
+                  SizedBox(height: 20),
+                  Image.asset(
+                    "assets/images/no internet.png",
+                    fit: BoxFit.cover,
+                  ),
+                  Center(
+                    child: Text(
+                      "Check Your Internet Connection",
+                      style: TextStyle(color: MyColors.myGrey, fontSize: 22),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
+
+// Widget _buildOffline() {
+//   return OfflineBuilder(
+//     connectivityBuilder:
+//         (
+//           BuildContext context,
+//           List<ConnectivityResult> connectivity,
+//           Widget child,
+//         ) {
+//           final bool connected = !connectivity.contains(
+//             ConnectivityResult.none,
+//           );
+//           return Stack(
+//             fit: StackFit.expand,
+//             children: [
+//               Positioned(
+//                 height: 24.0,
+//                 left: 0.0,
+//                 right: 0.0,
+//                 child: Container(
+//                   color: connected ? Color(0xFF00EE44) : Color(0xFFEE4400),
+//                   child: Center(
+//                     child: connected ? buildBlocWidget() : Text("OFFLINE"),
+//                   ),
+//                 ),
+//               ),
+//               Center(child: new Text('Yay!')),
+//             ],
+//           );
+//         },
+//     child: Column(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: <Widget>[
+//         new Text('There are no bottons to push :)'),
+//         new Text('Just turn off your internet.'),
+//       ],
+//     ),
+//   );
+// }
